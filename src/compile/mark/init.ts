@@ -23,7 +23,7 @@ import {
 } from '../../mark';
 import {QUANTITATIVE, TEMPORAL} from '../../type';
 import {contains, getFirstDefined} from '../../util';
-import {getMarkConfig} from '../common';
+import {getMarkConfig, getMarkPropOrConfig} from '../common';
 
 export function initMarkdef(
   mark: Mark | MarkDef,
@@ -65,7 +65,7 @@ export function initMarkdef(
   }
 
   // set opacity and filled if not specified in mark config
-  const specifiedOpacity = markDef.opacity ?? getMarkConfig('opacity', markDef, config);
+  const specifiedOpacity = getMarkPropOrConfig('opacity', markDef, config);
   if (specifiedOpacity === undefined) {
     markDef.opacity = opacity(markDef.type, encoding);
   }
