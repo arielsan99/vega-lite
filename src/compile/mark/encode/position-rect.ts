@@ -112,12 +112,11 @@ function defaultSizeRef(
   config: Config,
   band?: number
 ): VgValueRef {
-  const markPropOrConfig = getFirstDefined(
-    markDef[sizeChannel],
-    markDef.size,
+  const markPropOrConfig =
+    markDef[sizeChannel] ??
+    markDef.size ??
     // TODO: deal with sizeChannel config
-    getMarkConfig('size', markDef, config, {vgChannel: sizeChannel})
-  );
+    getMarkConfig('size', markDef, config, {vgChannel: sizeChannel});
 
   if (markPropOrConfig !== undefined) {
     return signalOrValueRef(markPropOrConfig);

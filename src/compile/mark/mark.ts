@@ -95,7 +95,7 @@ const STACK_GROUP_PREFIX = 'stack_group_';
 function getStackGroups(model: UnitModel) {
   // Don't use nested groups when cornerRadius is not specified, or specified as 0
   const hasCornerRadius = VG_CORNERRADIUS_CHANNELS.some(
-    prop => model.markDef[prop] || getMarkConfig(prop, model.markDef, model.config)
+    prop => model.markDef[prop] ?? getMarkConfig(prop, model.markDef, model.config)
   );
 
   // Activate groups if stack is used and the model doesn't have size encoding

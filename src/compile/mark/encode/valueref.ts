@@ -37,7 +37,7 @@ import {StackProperties} from '../../../stack';
 import {QUANTITATIVE, TEMPORAL} from '../../../type';
 import {contains, getFirstDefined} from '../../../util';
 import {isSignalRef, VgValueRef} from '../../../vega.schema';
-import {getMarkConfig, signalOrValueRef} from '../../common';
+import {getMarkPropOrConfig, signalOrValueRef} from '../../common';
 import {ScaleComponent} from '../../scale/component';
 
 export function midPointRefWithPositionInvalidTest(
@@ -87,7 +87,7 @@ export function wrapPositionInvalidTest({
     return ref;
   }
 
-  const invalid = getFirstDefined(markDef.invalid, getMarkConfig('invalid', markDef, config));
+  const invalid = getMarkPropOrConfig('invalid', markDef, config);
   if (invalid === null) {
     // if there is no invalid filter, don't do the invalid test
     return ref;

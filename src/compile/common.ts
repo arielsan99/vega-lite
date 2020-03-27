@@ -35,8 +35,16 @@ export function getStyles(mark: MarkDef): string[] {
   return [].concat(mark.type, mark.style ?? []);
 }
 
-export function getMarkPropOrConfig<P extends keyof MarkConfig>(channel: P, mark: MarkDef, config: Config) {
-  return getFirstDefined(mark[channel], getMarkConfig(channel, mark, config));
+export function getMarkPropOrConfig<P extends keyof MarkConfig>(
+  channel: P,
+  mark: MarkDef,
+  config: Config,
+  opt: {vgChannel?: any} = {} // Note: Ham: I use `any` here like in getMarkConfig below
+) {
+  if (mark[channel] !== undefined) {
+    return mark[channel];
+  }
+  return getMarkConfig(channel, mark, config, opt);
 }
 
 /**

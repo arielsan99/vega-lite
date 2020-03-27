@@ -1,7 +1,6 @@
 import {SignalRef} from 'vega';
 import {NonPositionScaleChannel} from '../../../channel';
 import {ValueOrGradient} from '../../../channeldef';
-import {getFirstDefined} from '../../../util';
 import {VgEncodeChannel, VgEncodeEntry, VgValueRef} from '../../../vega.schema';
 import {getMarkConfig, signalOrValueRef} from '../../common';
 import {UnitModel} from '../../unit';
@@ -31,7 +30,7 @@ export function nonPosition(
         ? // When vl channel is the same as Vega's, no need to read from config as Vega will apply them correctly
         markDef[channel]
         : // However, when they are different (e.g, vl's text size is vg fontSize), need to read "size" from configs
-        getFirstDefined(markDef[channel], markDef[vgChannel], getMarkConfig(channel, markDef, config, {vgChannel})));
+        markDef[channel] ?? markDef[vgChannel] ?? getMarkConfig(channel, markDef, config, {vgChannel}));
 
     if (defaultValue !== undefined) {
       defaultRef = signalOrValueRef(defaultValue);
